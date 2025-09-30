@@ -10,6 +10,7 @@
 //****************************************************
 #include "gravity.h"
 #include "object.manager.h"
+#include "planet.h"
 
 //****************************************************
 // usingディレクティブ
@@ -33,6 +34,9 @@ CGravity::~CGravity()
 
 }
 
+//===========================================================================================================
+// 更新
+//===========================================================================================================
 void CGravity::Update()
 {
 	float dis = CalDistance();
@@ -40,6 +44,9 @@ void CGravity::Update()
 	Efficacy(dis);
 }
 
+//===========================================================================================================
+// 生成
+//===========================================================================================================
 CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)
 {
 	// インスタンスを生成
@@ -60,8 +67,8 @@ CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)
 float CGravity::CalDistance()
 {
 	D3DXVECTOR3 pos = GetPos();
-
-	//CObjectManager::RefObjList(OBJ::TYPE::PLAYER);
+	std::list<CObject*>ol;
+	ol = CObjectManager::RefInstance().RefObjList(OBJ::TYPE::PLAYER);
 
 	// プレイヤーの情報
 	D3DXVECTOR3 PlayerPos = { 25.0f ,30.0f ,0.0f };
