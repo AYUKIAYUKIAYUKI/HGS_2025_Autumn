@@ -165,7 +165,7 @@
     <ClCompile Include="Src\MySrc\planet.cpp">
       <Filter>魔界\エンティティ %28ここをいじろう%29\planet</Filter>
     </ClCompile>
-    <ClCompile Include="gravity.cpp">
+    <ClCompile Include="Src\MySrc\gravity.cpp">
       <Filter>魔界\エンティティ %28ここをいじろう%29\gravity</Filter>
     </ClCompile>
   </ItemGroup>
@@ -293,7 +293,7 @@
     <ClInclude Include="Src\MySrc\planet.h">
       <Filter>魔界\エンティティ %28ここをいじろう%29\planet</Filter>
     </ClInclude>
-    <ClInclude Include="gravity.h">
+    <ClInclude Include="Src\MySrc\gravity.h">
       <Filter>魔界\エンティティ %28ここをいじろう%29\gravity</Filter>
     </ClInclude>
   </ItemGroup>
