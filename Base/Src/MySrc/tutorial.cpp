@@ -135,7 +135,7 @@ bool CTutorial::Initialize()
 	CCamera_Manager::RefInstance().SetSelectKey("Tutorial");
 
 	// ƒvƒŒƒCƒ„[‚Ì¶¬
-	fpInitialize();
+	//fpInitialize();
 
 	return true;
 }
