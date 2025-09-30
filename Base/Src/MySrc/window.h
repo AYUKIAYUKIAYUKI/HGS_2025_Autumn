@@ -36,16 +36,16 @@ class CWindow final : public CSingleton<CWindow>
 public:
 
 	//****************************************************
-	// 静的メンバ定数の定義 (公開)
+	// 静的メンバ変数の定義 (公開)
 	//****************************************************
 
 	// ウィンドウ横幅
-	static constexpr WORD  WWINDOW_WIDTH = 1280;
-	static constexpr float FWINDOW_WIDTH = 1280.0f;
+	static const WORD  WWINDOW_WIDTH;
+	static const float FWINDOW_WIDTH;
 
 	// ウィンドウ縦幅
-	static constexpr WORD  WWINDOW_HEIGHT = 720;
-	static constexpr float FWINDOW_HEIGHT = 720.0f;
+	static const WORD  WWINDOW_HEIGHT;
+	static const float FWINDOW_HEIGHT;
 
 	//****************************************************
 	// function
@@ -87,6 +87,8 @@ private:
 	void InitializeWindowClass(HINSTANCE hInstance); // ウィンドウクラスの初期化処理
 	void InitializeWindowRect();					 // クライアント領域の初期化処理
 	void MyCreateWindow(HINSTANCE hInstance);		 // ウィンドウの生成
+	
+	void ChangeMode(); // モード変更
 
 	// ウインドウプロシージャ
 	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

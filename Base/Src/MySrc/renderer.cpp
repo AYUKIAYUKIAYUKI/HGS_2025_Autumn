@@ -39,8 +39,8 @@ bool CRenderer::Initialize(HWND hWnd, BOOL bWindiw)
 	}
 
 	// デバイスのプレゼンテーションパラメータの設定
-	D3dpp.BackBufferWidth            = 1280;                        // ゲームサイズの横幅
-	D3dpp.BackBufferHeight           = 720;                         // ゲームサイズの高さ
+	D3dpp.BackBufferWidth            = CWindow::WWINDOW_WIDTH;      // ゲームサイズの横幅
+	D3dpp.BackBufferHeight           = CWindow::WWINDOW_HEIGHT;     // ゲームサイズの高さ
 	D3dpp.BackBufferFormat           = D3ddm.Format;                // バックバッファの形式
 	D3dpp.BackBufferCount            = 1;                           // バックバッファの数
 	D3dpp.SwapEffect                 = D3DSWAPEFFECT_DISCARD;       // ダブルバッファの切り替え(映像信号に同期)

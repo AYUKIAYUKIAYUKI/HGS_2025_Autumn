@@ -10,6 +10,14 @@
 //****************************************************
 #include "window.h"
 
+// ウィンドウ横幅
+const WORD  CWindow::WWINDOW_WIDTH = WORD(GetSystemMetrics(SM_CXSCREEN));
+const float CWindow::FWINDOW_WIDTH = float(GetSystemMetrics(SM_CXSCREEN));
+
+// ウィンドウ縦幅
+const WORD  CWindow::WWINDOW_HEIGHT = WORD(GetSystemMetrics(SM_CYSCREEN));
+const float CWindow::FWINDOW_HEIGHT = float(GetSystemMetrics(SM_CYSCREEN));
+
 //============================================================================
 // コンストラクタ
 //============================================================================
@@ -49,6 +57,9 @@ bool CWindow::Initialize(HINSTANCE hInstance)
 
 	// 分解能を設定
 	timeBeginPeriod(1);
+
+	// フルスクにしておく
+	ChangeMode();
 
 	return true;
 }
@@ -119,6 +130,32 @@ void CWindow::MyCreateWindow(HINSTANCE hInstance)
 	// ウィンドウの表示
 	ShowWindow(m_hWnd, SW_NORMAL);
 	UpdateWindow(m_hWnd);
+}
+
+//============================================================================
+// ウモード変更
+//============================================================================
+void CWindow::ChangeMode()
+{
+	// 現在のウィンドウスタイルを取得
+	DWORD dwStyle = GetWindowLong(m_hWnd, GWL_STYLE);
+
+	// ウィンドウの表示スタイルを変更する
+	SetWindowLong(m_hWnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
+
+	// クライアント領域・ウィンドウサイズを決定
+	RECT rect = { 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) };
+
+	// クライアント領域を反映
+	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
+
+	// 位置とサイズを反映
+	SetWindowPos(m_hWnd, HWND_TOP,
+		0,
+		0,
+		rect.right - rect.left,
+		rect.bottom - rect.top,
+		SWP_FRAMECHANGED | SWP_NOZORDER);
 }
 
 // メッセージハンドラーの宣言
