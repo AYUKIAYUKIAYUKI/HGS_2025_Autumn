@@ -180,6 +180,9 @@
     <ClCompile Include="Src\MySrc\GameBg.cpp">
       <Filter>魔界\エンティティ %28ここをいじろう%29</Filter>
     </ClCompile>
+    <ClCompile Include="Src\MySrc\game_1.cpp">
+      <Filter>魔界\死シーン %28ここもいじろう%29</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\MySrc\main.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="Src\MySrc\GameBg.h">
       <Filter>魔界\エンティティ %28ここをいじろう%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MySrc\game_1.h">
+      <Filter>魔界\死シーン %28ここもいじろう%29</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

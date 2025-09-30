@@ -17,6 +17,7 @@
 
 // シーン遷移用
 #include "result.h"
+#include "game_1.h"
 #include "scene_manager.h"
 #include "object.manager.h"
 
@@ -141,7 +142,7 @@ void CGame::Change()
 	CSound::GetInstance()->Stop(CSound::LABEL::BGM_0);
 
 	// リザルシーンへ変更
-	up<CResult> upScene = CreateUniquePtr<CResult>();
+	up<CGame_1> upScene = CreateUniquePtr<CGame_1>();
 	CSceneManager::RefInstance().ChangeScene(std::move(upScene));
 }
 
