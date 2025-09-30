@@ -24,7 +24,7 @@ CPlayer::CPlayer(OBJ::TYPE Type, OBJ::LAYER Layer)
 	: CObject2D(Type, Layer)
 	, m_OldPad{}
 	, m_PosBase(VEC3_ZERO_INIT)
-	, m_fBaseDistance(75.0f)
+	, m_fBaseDistance(60.0f)
 	, m_fSwingDistance(0.0f)
 	, m_fDirection(0.0f)
 	, m_fSwingSpeed(0.0f)
@@ -96,7 +96,9 @@ CPlayer* CPlayer::Create(const JSON& Json)
 void CPlayer::Swing()
 {
 	// 上昇・減少の強度
-	const float fCoef = 0.035f;
+	const float fSpeedCoef = 0.005f;
+	const float fDistanceCoef = 0.025f;
+
 #if 0
 	// 過去のスティック傾きとの差
 	int saX = CInputManager::RefInstance().GetPad()->GetJoyStickL().X - m_OldPad.GetJoyStickL().X;
@@ -121,26 +123,14 @@ void CPlayer::Swing()
 	if (CInputManager::RefInstance().GetPad()->GetJoyStickL().X != 0 ||
 		CInputManager::RefInstance().GetPad()->GetJoyStickL().Y != 0)
 	{
-		m_fSwingSpeed = (m_fSwingSpeed + fCoef * 2.0f) * (1.0f + fCoef);
-		m_fSwingDistance = (m_fSwingDistance + fCoef * 2.0f) * (1.0f + fCoef);
+		m_fSwingSpeed = (m_fSwingSpeed + fSpeedCoef * 0.1f) * (1.0f + fSpeedCoef);
+		m_fSwingDistance = (m_fSwingDistance + fDistanceCoef * 0.1f) * (1.0f + fDistanceCoef);
 	}
 	else
 	{
 		// スイング距離は常に減少
-		m_fSwingSpeed = m_fSwingSpeed - 0.01f;
-		m_fSwingDistance = m_fSwingDistance - 0.01f;
-	}
-
-	m_fDirection += m_fSwingSpeed;
-
-	// スイング距離の下限・上限を設定
-	if (m_fSwingDistance < 0.0f)
-	{
-		m_fSwingDistance = 0.0f;
-	}
-	else if (m_fSwingDistance > 35.0f)
-	{
-		m_fSwingDistance = 35.0f;
+		m_fSwingSpeed = (m_fSwingSpeed - fSpeedCoef * 0.1f) * (1.0f - fSpeedCoef);
+		m_fSwingDistance = (m_fSwingDistance - fDistanceCoef * 0.1f) * (1.0f - fDistanceCoef);
 	}
 
 	// スイング速度の下限・上限を設定
@@ -148,10 +138,23 @@ void CPlayer::Swing()
 	{
 		m_fSwingSpeed = 0.0f;
 	}
-	else if (m_fSwingSpeed > 0.5f)
+	else if (m_fSwingSpeed > 0.25f)
 	{
-		m_fSwingSpeed = 0.5f;
+		m_fSwingSpeed = 0.25f;
 	}
+
+	// スイング距離の下限・上限を設定
+	if (m_fSwingDistance < 0.0f)
+	{
+		m_fSwingDistance = 0.0f;
+	}
+	else if (m_fSwingDistance > 40.0f)
+	{
+		m_fSwingDistance = 40.0f;
+	}
+
+	// 最終的なスイング速度分、プレイヤーが周回
+	m_fDirection += m_fSwingSpeed;
 
 	// 現在の座標取得
 	Vec3 Pos = GetPos();
