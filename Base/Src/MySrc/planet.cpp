@@ -9,6 +9,7 @@
 // インクルードファイル
 //****************************************************
 #include "planet.h"
+//#include "gravity.h"
 
 //****************************************************
 // usingディレクティブ
@@ -68,5 +69,8 @@ CPlanet* CPlanet::Create(/*const JSON& Json*/)
 	p->SetRot(Rot);//向き設定
 	p->SetSize(SizeSize);//大きさ設定
 	//p->BindTex();//テクスチャの設定
+
+	//CGravity::Create(PosPos, SizeSize.x * 1.5f);
+
 	return p;
 }
