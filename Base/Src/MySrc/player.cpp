@@ -30,7 +30,10 @@ CPlayer::CPlayer(OBJ::TYPE Type, OBJ::LAYER Layer)
 	, m_fSwingSpeed(0.0f)
 	, m_bLaunch(false)
 	, m_Velocity(VEC3_ZERO_INIT)
-{}
+{
+	// 初期位置を基点に
+	SetPos(m_PosBase);
+}
 
 //============================================================================
 // デストラクタ
