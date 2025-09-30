@@ -35,6 +35,7 @@ namespace OBJ
 		NONE = 0, // –³‚µ
 		PLAYER,   // ƒvƒŒƒCƒ„[
 		PLANET,   // ˜f¯
+		GRAVITY,  // ˆø—Í
 		MAX
 	};
 }
