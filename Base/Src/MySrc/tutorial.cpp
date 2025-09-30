@@ -20,6 +20,44 @@
 #include "scene_manager.h"
 #include "object.manager.h"
 
+#include "player.h"
+
+// ゲームに写す用
+namespace
+{
+	// プレイヤーのポインタ
+	CPlayer* m_pPlayer = nullptr;
+
+	// プレイヤーのセットアップ
+	auto fpInitialize = []() -> void
+	{
+		m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+	};
+
+	// プレイヤー向け更新
+	auto fpUpdate = []() -> void
+	{
+		D3DXVECTOR3 PosPos = m_pPlayer->GetPos();
+		D3DXVECTOR3 SizeSize = m_pPlayer->GetSize();
+
+		if (useful::MIS::MyImGuiShortcut_BeginWindow("fpUpdate", { 300, 100 }))
+		{
+			useful::MIS::MyImGuiShortcut_DragVector("PosPos", PosPos, 1.0f);
+			useful::MIS::MyImGuiShortcut_DragVector("SizeSize", SizeSize, 1.0f);
+			ImGui::End();
+		}
+
+		m_pPlayer->SetPos(PosPos);
+		m_pPlayer->SetSize(SizeSize);
+	};
+
+	// プレイヤーのクリーンアップ
+	auto fpFinalize = []() -> void
+	{
+		m_pPlayer = nullptr;
+	};
+}
+
 //****************************************************
 // usingディレクティブ
 //****************************************************
@@ -49,6 +87,8 @@ void CTutorial::Update()
 #ifdef _DEBUG
 	CRenderer::RefInstance().AddText("珍鳥", 1);
 #endif // _DEBUG
+
+	//fpUpdate();
 
 	// 次のシーンへ遷移
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
@@ -89,6 +129,9 @@ bool CTutorial::Initialize()
 
 	CCamera_Manager::RefInstance().SetSelectKey("Tutorial");
 
+	// プレイヤーの生成
+	fpInitialize();
+
 	return true;
 }
 
@@ -96,4 +139,6 @@ bool CTutorial::Initialize()
 // 終了処理
 //============================================================================
 void CTutorial::Finalize()
-{}
+{
+	fpFinalize();
+}

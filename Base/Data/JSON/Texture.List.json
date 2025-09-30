@@ -3,6 +3,10 @@
     [
       "Unko",
       "Data\\TEXTURE\\unko.png"
+    ],
+    [
+      "Sphere",
+      "Data\\TEXTURE\\sphere.png"
     ]
   ]
 }
