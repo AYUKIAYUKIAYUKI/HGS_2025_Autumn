@@ -56,9 +56,6 @@ bool CObject2D::Initialize()
 		return false;
 	}
 
-	// ‚â‚ß‚æ‚¤
-	m_Size = { 500.0f, 500.0f, 0.0f };
-
 	return true;
 }
 

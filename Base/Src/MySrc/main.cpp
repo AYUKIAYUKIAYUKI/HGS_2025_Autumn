@@ -85,13 +85,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE /*hInstancePre
 	CWindow::CSingleton::RefInstance().MessageLoop(
 		[]() -> void
 		{
-			// シーンの更新処理
-			CSceneManager::RefInstance().GetScene()->Update();
-
 			// レンダラーの更新処理
 			CRenderer::CSingleton::RefInstance().Update_ε(
 				[]() -> void
 				{
+					// シーンの更新処理
+					CSceneManager::RefInstance().GetScene()->Update();
+
 					// フリーカメラの更新
 					CCamera::UpdateFreeCam();
 
