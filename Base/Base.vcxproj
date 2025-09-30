@@ -178,6 +178,7 @@ if exist "$(OutDir)$(TargetName).exp" del "$(OutDir)$(TargetName).exp"</Command>
     <ClCompile Include="Src\MySrc\main.cpp" />
     <ClCompile Include="Src\MySrc\input.manager.cpp" />
     <ClCompile Include="Src\MySrc\object.cpp" />
+    <ClCompile Include="Src\MySrc\object.effect.cpp" />
     <ClCompile Include="Src\MySrc\object.ixx">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -248,6 +249,7 @@ if exist "$(OutDir)$(TargetName).exp" del "$(OutDir)$(TargetName).exp"</Command>
     <ClInclude Include="Src\MySrc\light.h" />
     <ClInclude Include="Src\MySrc\main.h" />
     <ClInclude Include="Src\MySrc\input.manager.h" />
+    <ClInclude Include="Src\MySrc\object.effect.h" />
     <ClInclude Include="Src\MySrc\object.h" />
     <ClInclude Include="Src\MySrc\object.manager.h" />
     <ClInclude Include="Src\MySrc\object.2D.h" />
