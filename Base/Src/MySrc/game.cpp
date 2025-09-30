@@ -161,7 +161,7 @@ bool CGame::Initialize()
 
 	//–³—‚â‚è˜f¯‚ğ¶¬
 	D3DXVECTOR3 Pos;
-	Pos = { 500.0f,720.0f,0.0f };
+	Pos = { 500.0f,820.0f,0.0f };
 	m_PlanetList.push_back(CPlanet::Create(Pos));
 	Pos = { 1000.0f,100.0f,0.0f };
 	m_PlanetList.push_back(CPlanet::Create(Pos));

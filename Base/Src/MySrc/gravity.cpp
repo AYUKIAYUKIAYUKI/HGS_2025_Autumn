@@ -111,21 +111,27 @@ void CGravity::Efficacy(float dis)
 
 	D3DXVECTOR3 velo = pPlayer->GetVelocity();
 
-	if (dis >= 500)
+	float a = 0.001f;
+
+	if (dis>=400)
 	{
-		m_GravityForce = 0.001f;
+		m_GravityForce = 0.0f;
 	}
-	else if (dis < 500 && dis >= 200)
+	else if (dis < 400 && dis >= 300)
 	{
-		m_GravityForce = 0.0035f;
+		m_GravityForce = 0.001f+ a;
+	}
+	else if (dis < 300 && dis >= 200)
+	{
+		m_GravityForce = 0.0035f+ a;
 	}
 	else if (dis < 200 && dis >= 50)
 	{
-		m_GravityForce = 0.01f;
+		m_GravityForce = 0.005f+ a;
 	}
 	else
 	{
-		m_GravityForce = 0.1f;
+		m_GravityForce = 0.1f+ a;
 	}
 
 	// ‹——£‚ª“ñ‚Â‚Ì‰~‚Ì‘å‚«‚³ˆÈ‰º‚ÌŽž
