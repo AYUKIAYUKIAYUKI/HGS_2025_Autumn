@@ -23,7 +23,8 @@ using namespace useful;
 CGravity::CGravity(OBJ::TYPE Type, OBJ::LAYER Layer)
 	: CObject2D(Type, Layer)
 {
-
+	m_GravityForce = 0.0f;
+	m_GravityRadius = 0.0f;
 }
 
 //============================================================================
@@ -110,19 +111,36 @@ void CGravity::Efficacy(float dis)
 
 	D3DXVECTOR3 velo = pPlayer->GetVelocity();
 
-	/* •ûŠp‚Ì‘€ì‚ÆŠp“x‚Ìo—Í */
-	if (useful::MIS::MyImGuiShortcut_BeginWindow("aaaaaaaaaa"))
+	if (dis >= 500)
 	{
-		ImGui::Text("distance: %f", dis);
-		ImGui::Text("velo: %f , %f", velo.x,velo.y);
+		m_GravityForce = 0.001f;
 	}
-	ImGui::End();
+	else if (dis < 500 && dis >= 200)
+	{
+		m_GravityForce = 0.0035f;
+	}
+	else if (dis < 200 && dis >= 50)
+	{
+		m_GravityForce = 0.01f;
+	}
+	else
+	{
+		m_GravityForce = 0.1f;
+	}
 
 	// ‹——£‚ª“ñ‚Â‚Ì‰~‚Ì‘å‚«‚³ˆÈ‰º‚Ì
 	if (dis <= m_GravityRadius + PlayerRadius)
 	{
 		// ˆÚ“®’l‚Ìİ’è
-		velo = (velo + (D3DXVECTOR3(sinf(DirectionMove) * pPlayer->GetLength() * 0.001f+(dis*0.0001f), cosf(DirectionMove) * pPlayer->GetLength() * 0.001f+ (dis * 0.0001f), 0.0f)));
+		velo = (velo + (D3DXVECTOR3(sinf(DirectionMove) * pPlayer->GetLength() * m_GravityForce/*+(dis*0.0001f)*/, cosf(DirectionMove) * pPlayer->GetLength() * m_GravityForce/*+ (dis * 0.0001f)*/, 0.0f)));
 		pPlayer->SetVelocity(velo);
 	}
+
+	/* •ûŠp‚Ì‘€ì‚ÆŠp“x‚Ìo—Í */
+	if (useful::MIS::MyImGuiShortcut_BeginWindow("aaaaaaaaaa"))
+	{
+		ImGui::Text("distance: %f", dis);
+		ImGui::Text("velo: %f , %f", velo.x, velo.y);
+	}
+	ImGui::End();
 }
