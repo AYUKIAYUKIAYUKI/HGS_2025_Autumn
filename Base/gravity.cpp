@@ -9,6 +9,7 @@
 // インクルードファイル
 //****************************************************
 #include "gravity.h"
+#include "object.manager.h"
 
 //****************************************************
 // usingディレクティブ
@@ -60,10 +61,11 @@ float CGravity::CalDistance()
 {
 	D3DXVECTOR3 pos = GetPos();
 
-	// 円２の情報
+	//CObjectManager::RefObjList(OBJ::TYPE::PLAYER);
+
+	// プレイヤーの情報
 	D3DXVECTOR3 PlayerPos = { 25.0f ,30.0f ,0.0f };
 	
-
 	float cal_a = pos.x - PlayerPos.x;	// x の計算
 	float cal_b = pos.y - PlayerPos.y;	// y の計算
 
