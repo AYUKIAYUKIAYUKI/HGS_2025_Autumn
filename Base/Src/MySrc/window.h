@@ -109,6 +109,13 @@ private:
 template <typename T>
 void CWindow::MessageLoop(T&& fpMainLoop)
 {
+	// FPS計測用
+	int   nCountFPS = 0;					// 現在のFPS
+	DWORD dwCurrentTime = 0;				// 現在時刻用
+	DWORD dwFrameCount = 0;					// 最後に処理した時間
+	DWORD dwExecLastTime = timeGetTime();	// フレームカウント格納
+	DWORD dwFPSLastTime = timeGetTime();	// 最後にFPSを計測した時刻格納
+
 	while (true)
 	{
 		// メッセージを確認
@@ -126,8 +133,31 @@ void CWindow::MessageLoop(T&& fpMainLoop)
 		}
 		else
 		{
-			// メインループ実行
-			fpMainLoop();
+			// 現在時刻を取得
+			dwCurrentTime = timeGetTime();
+
+			if ((dwCurrentTime - dwFPSLastTime) >= 500)
+			{
+				// FPSを計測
+				nCountFPS = (dwFrameCount * 1000) / (dwCurrentTime - dwFPSLastTime);
+
+				// FPSを計測した時間を保存
+				dwFPSLastTime = dwCurrentTime;
+
+				// フレームカウントをクリア
+				dwFrameCount = 0;
+			}
+
+			if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+			{
+				// 現在時刻を保存
+				dwExecLastTime = dwCurrentTime;
+
+				fpMainLoop();
+
+				// フレームカウントを加算
+				++dwFrameCount;
+			}
 		}
 	}
 }
