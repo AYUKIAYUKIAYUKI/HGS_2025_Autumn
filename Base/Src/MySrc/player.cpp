@@ -26,7 +26,7 @@ CPlayer::CPlayer(OBJ::TYPE Type, OBJ::LAYER Layer)
 	, m_PosBase(VEC3_ZERO_INIT)
 	, m_fBaseDistance(60.0f)
 	, m_fSwingDistance(0.0f)
-	, m_fDirection(0.0f)
+	, m_fDirection(D3DX_PI * 0.5f)
 	, m_fSwingSpeed(0.0f)
 	, m_bLaunch(false)
 	, m_Velocity(VEC3_ZERO_INIT)
@@ -94,7 +94,7 @@ CPlayer* CPlayer::Create(const JSON& Json)
 		pp->Initialize();
 		pp->SetPos(useful::JsonConvertToVec3(Json["InitPos"]));
 		pp->SetSize({ p->m_fBaseDistance, p->m_fBaseDistance, 0.0f });
-		pp->SetCol({ 0.0f, 0.0f, 1.0f, 1.0f });
+		pp->SetCol({ 0.5f, 0.5f, 1.0f, 1.0f });
 	}
 
 	return p;
@@ -172,11 +172,14 @@ void CPlayer::Swing()
 	// 発射時に、速度や進行方向を保つために位置を保持
 	Vec3 PosOld = Pos;
 
+	// 見た目調整用のサイズ取得
+	Vec3 Size = GetSize();
+
 	// 基点の座標を元に、現在の方角分、基点距離 + 速度距離分離す
 	Pos =
 	{
-		m_PosBase.x + sinf(m_fDirection) * (m_fBaseDistance + m_fSwingDistance),
-		m_PosBase.y + cosf(m_fDirection) * (m_fBaseDistance + m_fSwingDistance),
+		m_PosBase.x + sinf(m_fDirection) * (m_fBaseDistance + Size.x + m_fSwingDistance),
+		m_PosBase.y + cosf(m_fDirection) * (m_fBaseDistance + Size.y + m_fSwingDistance),
 		m_PosBase.z,
 	};
 
