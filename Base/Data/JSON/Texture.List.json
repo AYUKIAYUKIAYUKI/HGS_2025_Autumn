@@ -7,6 +7,18 @@
     [
       "Sphere",
       "Data\\TEXTURE\\sphere.png"
+    ],
+    [
+      "moon",
+      "Data\\TEXTURE\\moon.png"
+    ],
+    [
+      "p2",
+      "Data\\TEXTURE\\planet002.png"
+    ],
+    [
+      "BG",
+      "Data\\TEXTURE\\GameBg.png"
     ]
   ]
 }

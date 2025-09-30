@@ -1,6 +1,6 @@
 //============================================================================
 // 
-// ゴール [goal.cpp]
+// 惑星 [planet.cpp]
 // Author : 後藤優輝
 // 
 //============================================================================
@@ -8,8 +8,9 @@
 //****************************************************
 // インクルードファイル
 //****************************************************
-#include "goal.h"
+#include "GameBg.h"
 #include "texture.manager.h"
+#include "window.h"
 
 //****************************************************
 // usingディレクティブ
@@ -19,7 +20,7 @@ using namespace useful;
 //============================================================================
 // コンストラクタ
 //============================================================================
-CGoal::CGoal(OBJ::TYPE Type, OBJ::LAYER Layer)
+CGameBg::CGameBg(OBJ::TYPE Type, OBJ::LAYER Layer)
 	: CObject2D(Type, Layer)
 {
 
@@ -28,7 +29,7 @@ CGoal::CGoal(OBJ::TYPE Type, OBJ::LAYER Layer)
 //============================================================================
 // デストラクタ
 //============================================================================
-CGoal::~CGoal()
+CGameBg::~CGameBg()
 {
 
 }
@@ -36,7 +37,7 @@ CGoal::~CGoal()
 //============================================================================
 // 更新処理
 //============================================================================
-void CGoal::Update()
+void CGameBg::Update()
 {
 	CObject2D::Update();
 }
@@ -44,7 +45,7 @@ void CGoal::Update()
 //============================================================================
 // 描画処理
 //============================================================================
-void CGoal::Draw()
+void CGameBg::Draw()
 {
 	CObject2D::Draw();
 }
@@ -52,20 +53,26 @@ void CGoal::Draw()
 //============================================================================
 // 生成
 //============================================================================
-CGoal* CGoal::Create(D3DXVECTOR3 Pos)
+CGameBg* CGameBg::Create()
 {
-	CGoal* p = DBG_NEW CGoal(OBJ::TYPE::GOAL, OBJ::LAYER::DEFAULT);
+	CGameBg* p = DBG_NEW CGameBg(OBJ::TYPE::GAMEBG, OBJ::LAYER::BG);
 
 	//初期化処理
 	p->Initialize();
 
 	// どっかローカルに置いたパラメータ
-	D3DXVECTOR3 SizeSize = { 100.0f, 100.0f, 0.0f };
+	float ScreenHeight = CWindow::FWINDOW_HEIGHT / 2;
+	float ScreenWidth = CWindow::FWINDOW_WIDTH / 2;
+
+	D3DXVECTOR3 Pos = { ScreenWidth, ScreenHeight, 0.0f };
+	D3DXVECTOR3 SizeSize = { ScreenWidth, ScreenHeight, 0.0f };
 	D3DXVECTOR3 Rot = { 0.0f, 0.0f, 0.0f };
+
 
 	p->SetPos(Pos);//位置設定
 	p->SetRot(Rot);//向き設定
 	p->SetSize(SizeSize);//大きさ設定
-	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("moon"));//テクスチャの設定
+	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("BG"));//テクスチャの設定
+
 	return p;
 }
