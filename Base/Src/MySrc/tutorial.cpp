@@ -84,9 +84,7 @@ CTutorial::~CTutorial()
 //============================================================================
 void CTutorial::Update()
 {
-#ifdef _DEBUG
-	CRenderer::RefInstance().AddText("スティックを傾けて回しなさい。そしてAで投げなさい", 1);
-#endif // _DEBUG
+	CRenderer::RefInstance().AddText("スティックを傾けて回しなさい。そしてAで投げなさい。", 1);
 
 	//fpUpdate();
 

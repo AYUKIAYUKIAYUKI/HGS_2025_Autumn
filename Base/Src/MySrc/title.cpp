@@ -98,9 +98,7 @@ CTitle::~CTitle()
 //============================================================================
 void CTitle::Update()
 {
-#ifdef _DEBUG
 	CRenderer::RefInstance().AddText("ポイポイ", 1);
-#endif // _DEBUG
 
 	// これが更新サンプルです
 	//ffppEdit();

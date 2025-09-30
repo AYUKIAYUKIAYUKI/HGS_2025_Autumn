@@ -47,9 +47,7 @@ CResult::~CResult()
 //============================================================================
 void CResult::Update()
 {
-#ifdef _DEBUG
 	CRenderer::RefInstance().AddText("‚¨‘O‚Í¬Œ÷‚µ‚½‚æ", 1);
-#endif // _DEBUG
 
 	// ŽŸ‚ÌƒV[ƒ“‚Ö‘JˆÚ
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN) ||

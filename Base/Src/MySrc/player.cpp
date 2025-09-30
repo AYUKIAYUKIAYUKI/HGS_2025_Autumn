@@ -187,6 +187,8 @@ void CPlayer::Swing()
 		m_PosBase.z,
 	};
 
+
+#if _DEBUG
 	/* •ûŠp‚Ì‘€ì‚ÆŠp“x‚Ìo—Í */
 	if (useful::MIS::MyImGuiShortcut_BeginWindow("Player Swing"))
 	{
@@ -199,6 +201,7 @@ void CPlayer::Swing()
 		ImGui::Text("SwingSpeed: %f", m_fSwingSpeed);
 	}
 	ImGui::End();
+#endif
 
 	// ŒvZŒã‚ÌŠp“x‚ğ -ƒÎ ` ƒÎ ‚Ì”ÍˆÍ‚É—}‚¦‚é
 	useful::WrapAngleToRange(m_fDirection);

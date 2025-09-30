@@ -92,9 +92,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE /*hInstancePre
 					// シーンの更新処理
 					CSceneManager::RefInstance().GetScene()->Update();
 
-					// フリーカメラの更新
-					CCamera::UpdateFreeCam();
-
 					// 選択中カメラの更新
 					CCamera_Manager::RefInstance().RefSelectCamera().Update();
 

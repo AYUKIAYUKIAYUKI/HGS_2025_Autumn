@@ -142,6 +142,7 @@ void CGravity::Efficacy(float dis)
 		pPlayer->SetVelocity(velo);
 	}
 
+#if _DEBUG
 	/* •ûŠp‚Ì‘€ì‚ÆŠp“x‚Ìo—Í */
 	if (useful::MIS::MyImGuiShortcut_BeginWindow("aaaaaaaaaa"))
 	{
@@ -149,4 +150,5 @@ void CGravity::Efficacy(float dis)
 		ImGui::Text("velo: %f , %f", velo.x, velo.y);
 	}
 	ImGui::End();
+#endif
 }
