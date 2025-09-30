@@ -61,7 +61,7 @@ CPlanet* CPlanet::Create(D3DXVECTOR3 pos)
 	p->Initialize();
 
 	// どっかローカルに置いたパラメータ
-	D3DXVECTOR3 SizeSize = { 100.0f, 100.0f, 0.0f };
+	D3DXVECTOR3 SizeSize = { 150.0f, 150.0f, 0.0f };
 	D3DXVECTOR3 Rot = { 0.0f, 0.0f, 0.0f };
 
 
