@@ -248,6 +248,7 @@ if exist "$(OutDir)$(TargetName).exp" del "$(OutDir)$(TargetName).exp"</Command>
     <ClInclude Include="Src\MySrc\object.text.h" />
     <ClInclude Include="Src\MySrc\object_X.h" />
     <ClInclude Include="Src\MySrc\pch.h" />
+    <ClInclude Include="Src\MySrc\planet.h" />
     <ClInclude Include="Src\MySrc\player.h" />
     <ClInclude Include="Src\MySrc\registry.h" />
     <ClInclude Include="Src\MySrc\renderer.h" />
@@ -262,7 +263,6 @@ if exist "$(OutDir)$(TargetName).exp" del "$(OutDir)$(TargetName).exp"</Command>
     <ClInclude Include="Src\MySrc\useful.h" />
     <ClInclude Include="Src\MySrc\window.h" />
     <ClInclude Include="Src\MySrc\X_manager.h" />
-    <ClInclude Include="Src\MySrc\planet.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\MySrc\registry.impl" />

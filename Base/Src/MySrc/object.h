@@ -34,6 +34,7 @@ namespace OBJ
 	{
 		NONE = 0, // –³‚µ
 		PLAYER,   // ƒvƒŒƒCƒ„[
+		PLANET,   // ˜f¯
 		MAX
 	};
 }
