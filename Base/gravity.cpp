@@ -34,9 +34,9 @@ CGravity::~CGravity()
 
 void CGravity::Update()
 {
-	float dis = Range();
+	float dis = CalDistance();
 
-	Use(dis);
+	Efficacy(dis);
 }
 
 CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)

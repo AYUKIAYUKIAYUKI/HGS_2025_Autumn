@@ -40,8 +40,8 @@
     <Filter Include="魔界\エンティティ %28ここをいじろう%29\planet">
       <UniqueIdentifier>{e57fe3d4-38a2-439d-a410-1689af5e95b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="魔界\エンティティ %28ここをいじろう%29\TitleImage">
-      <UniqueIdentifier>{ea685d26-6fba-4710-beb2-69b108e18997}</UniqueIdentifier>
+    <Filter Include="魔界\エンティティ %28ここをいじろう%29\gravity">
+      <UniqueIdentifier>{32daa6fd-2598-4ee6-8c85-b1af8ece7f5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,8 +165,8 @@
     <ClCompile Include="Src\MySrc\planet.cpp">
       <Filter>魔界\エンティティ %28ここをいじろう%29\planet</Filter>
     </ClCompile>
-    <ClCompile Include="Src\MySrc\TitleImage.cpp">
-      <Filter>魔界\エンティティ %28ここをいじろう%29\TitleImage</Filter>
+    <ClCompile Include="gravity.cpp">
+      <Filter>魔界\エンティティ %28ここをいじろう%29\gravity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,8 +293,8 @@
     <ClInclude Include="Src\MySrc\planet.h">
       <Filter>魔界\エンティティ %28ここをいじろう%29\planet</Filter>
     </ClInclude>
-    <ClInclude Include="Src\MySrc\TitleImage.h">
-      <Filter>魔界\エンティティ %28ここをいじろう%29\TitleImage</Filter>
+    <ClInclude Include="gravity.h">
+      <Filter>魔界\エンティティ %28ここをいじろう%29\gravity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
