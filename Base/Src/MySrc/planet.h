@@ -48,4 +48,10 @@ private:
 	void AdjustPos();		// 位置を調整
 
 	// <Data>
+	int			m_nLeftNumJump;	// ジャンプ可能回数
+	float		m_fJumpForce;	// ジャンプ力
+	D3DXVECTOR3 m_Velocity;		// 加速度
+	D3DXVECTOR3 m_PosTarget;	// 目標位置
+	D3DXVECTOR3 m_RotTarget;	// 目標向き
+	D3DXVECTOR3 m_RotTarget;	// 目標サイズ
 };
