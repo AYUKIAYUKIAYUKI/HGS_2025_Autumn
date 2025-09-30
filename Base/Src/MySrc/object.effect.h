@@ -46,6 +46,7 @@ public:
 		CObject2D::Update();
 
 		// à⁄ìÆ
+		useful::ExponentialDecay(m_Vel, useful::VEC3_ZERO_INIT, 0.15f);
 		D3DXVECTOR3 pos = GetPos();
 		pos += m_Vel;
 		SetPos(pos);
@@ -62,6 +63,10 @@ public:
 				auto Col = GetCol();
 				Col.a = (1.0f / static_cast<float>(m_nGhostTime)) * m_nLimit;
 				SetCol(Col);
+
+				D3DXVECTOR3 rot = GetRot();
+				rot.z = Col.a;
+				SetRot(rot);
 			}
 		}
 		else
@@ -77,7 +82,7 @@ public:
 	}
 
 	// <static function>
-	static CObjectEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 vel, const JSON& json); // ê∂ê¨
+	static CObjectEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 vel, D3DXVECTOR3 Size, const JSON& json); // ê∂ê¨
 
 	int m_nLimit;
 	int m_nGhostTime;

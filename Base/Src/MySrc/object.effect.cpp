@@ -27,25 +27,27 @@ CObjectEffect::~CObjectEffect()
 
 }
 
-CObjectEffect* CObjectEffect::Create(D3DXVECTOR3 pos , D3DXVECTOR3 vel, const JSON& json)
+CObjectEffect* CObjectEffect::Create(D3DXVECTOR3 pos , D3DXVECTOR3 vel, D3DXVECTOR3 Size,  const JSON& json)
 {
 	CObjectEffect* p = DBG_NEW CObjectEffect(OBJ::TYPE::NONE, OBJ::LAYER::UI);
 
 	p->Initialize();
 
-	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("Unko"));
+	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("Effect"));
 
 	p->m_Vel = vel;
 
 	// À•W‚ğ“K“–‚É‚¸‚ç‚·
 	pos += {
-		useful::GetRandomValue<float>(3.0f),
-			useful::GetRandomValue<float>(3.0f),
-			useful::GetRandomValue<float>(3.0f),
+		useful::GetRandomValue<float>(30.0f),
+		useful::GetRandomValue<float>(30.0f),
+		0.0f
 	};
 
+	p->SetSize(Size);
+	p->SetRot(pos);
 	p->SetPos(pos);
-	p->SetSize({ 10.0f, 10.0f, 0.0f });
+	p->SetCol({ 1.0f, 1.0f, 1.0f, 0.5f });
 
 	return p;
 }

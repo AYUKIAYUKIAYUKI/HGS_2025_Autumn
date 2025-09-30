@@ -11,6 +11,7 @@
 #include "player.h"
 #include "texture.manager.h"
 #include "input.manager.h"
+#include "object.effect.h"
 
 //****************************************************
 // usingディレクティブ
@@ -208,6 +209,17 @@ void CPlayer::Swing()
 	// パッドの情報をコピー
 	m_OldPad = *CInputManager::RefInstance().GetPad();
 
+	// ガチで飛行する方向を決める
+	m_Velocity =
+	{
+		(Pos.x - PosOld.x),
+		(Pos.y - PosOld.y),
+		0.0f
+	};
+
+	// 移動速度に応じたエフェクト生成
+	CObjectEffect::Create(Pos, -m_Velocity * 0.5f, { m_fSwingDistance * 0.25f, m_fSwingDistance * 0.25f, 0.0f }, nullptr);
+
 	// 発射
 	if (CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::A) ||
 		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::B) ||
@@ -217,13 +229,11 @@ void CPlayer::Swing()
 		// もうスイング処理はしない
 		m_bLaunch = true;
 
-	    // ガチで飛行する方向を決める
-		m_Velocity = 
+		// 発射エフェクトの生成
+		for (int i = 0; i < 15; ++i)
 		{
-			(Pos.x - PosOld.x),
-			(Pos.y - PosOld.y),
-			0.0f
-		};
+			CObjectEffect::Create(Pos, -m_Velocity * 0.5f, { 20.0f, 20.0f, 0.0f },  nullptr);
+		}
 	}
 }
 
