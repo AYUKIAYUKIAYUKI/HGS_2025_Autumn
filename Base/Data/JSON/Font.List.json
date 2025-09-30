@@ -9,6 +9,10 @@
       "Data\\Font\\Meiryo\\Param.json"
     ],
     [
+      "Meiryo_B",
+      "Data\\Font\\Meiryo\\Param_Big.json"
+    ],
+    [
       "Tamanegi",
       "Data\\Font\\Tamanegi\\Param.json"
     ]

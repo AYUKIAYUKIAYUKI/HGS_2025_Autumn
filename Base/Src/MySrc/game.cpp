@@ -25,6 +25,7 @@
 #include "goal.h"
 #include"player.h"
 #include"GameBg.h"
+#include "window.h"
 
 //****************************************************
 // usingディレクティブ
@@ -36,6 +37,7 @@ using namespace useful;
 //============================================================================
 CGame::CGame()
 	: CScene()
+	, m_pPlayer(nullptr)
 {
 }
 
@@ -56,6 +58,29 @@ void CGame::Update()
 #ifdef _DEBUG
 	CRenderer::RefInstance().AddText("ゲーム機に", 1);
 #endif // _DEBUG
+
+	// ① プレイヤーが画面外に
+	if (m_pPlayer)
+	{
+		Vec3 Pos = m_pPlayer->GetPos();
+
+		if (Pos.x < 0.0f || Pos.x > CWindow::FWINDOW_WIDTH ||
+			Pos.y < 0.0f || Pos.y > CWindow::FWINDOW_HEIGHT)
+		{
+			// ② 文字作成
+			CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\Failed.json"));
+
+			// ③ 今いるプレイヤーを削除
+			if (m_pPlayer)
+			{
+				m_pPlayer->SetDeath();
+				m_pPlayer = nullptr;
+			}
+
+			// ④ 新しいプレイヤーを作成
+			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+		}
+	}
 
 	// 次のシーンへ遷移
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
@@ -117,7 +142,10 @@ bool CGame::Initialize()
 	CGoal::Create(Pos);
 
 	//無理やりプレイヤーを生成
-	CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+	if (!m_pPlayer)
+	{
+		m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+	}
 
 	return true;
 }
