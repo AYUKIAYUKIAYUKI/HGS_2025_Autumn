@@ -115,8 +115,12 @@ void CTitle::Update()
 
 
 	// ŽŸ‚ÌƒV[ƒ“‚Ö‘JˆÚ
-	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN)
-		|| CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::START))
+	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::START) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::A) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::B) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::X) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::Y))
 	{
 		Change();
 	}
