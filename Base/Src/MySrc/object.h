@@ -37,6 +37,7 @@ namespace OBJ
 		PLANET,   // ˜f¯
 		GRAVITY,  // ˆø—Í
 		GOAL,	  // ƒS[ƒ‹
+		GAMEBG,	  //@”wŒi
 		MAX
 	};
 }

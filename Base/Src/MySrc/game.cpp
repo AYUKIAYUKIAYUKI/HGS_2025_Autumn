@@ -24,6 +24,7 @@
 #include "planet.h"
 #include "goal.h"
 #include"player.h"
+#include"GameBg.h"
 
 //****************************************************
 // usingディレクティブ
@@ -100,6 +101,9 @@ bool CGame::Initialize()
 	CSound::GetInstance()->Play(CSound::LABEL::BGM_0);
 
 	CCamera_Manager::RefInstance().SetSelectKey("Game");
+
+	//無理やり背景を生成
+	CGameBg::Create();
 
 	//無理やり惑星を生成
 	D3DXVECTOR3 Pos;

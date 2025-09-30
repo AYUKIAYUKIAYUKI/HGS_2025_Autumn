@@ -15,6 +15,10 @@
     [
       "p2",
       "Data\\TEXTURE\\planet002.png"
+    ],
+    [
+      "BG",
+      "Data\\TEXTURE\\GameBg.png"
     ]
   ]
 }
