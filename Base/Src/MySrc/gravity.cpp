@@ -57,6 +57,7 @@ CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)
 
 	pGravity->SetPos(pos);
 	pGravity->SetSize({ radius,radius,0.0f });
+	pGravity->m_GravityRadius = radius * 2.0f;
 	
 	return pGravity;
 }
@@ -103,12 +104,17 @@ void CGravity::Efficacy(float dis)
 	// ˜f¯‚Ì’†S
 	D3DXVECTOR3 pos = GetPos();
 
-	float DirectionMove = atan2f(PlayerPos.x - pos.x, PlayerPos.y - pos.y);	// Œ»Ý‚ÌˆÚ“®•ûŒü
+	float DirectionMove = atan2f(pos.x - PlayerPos.x, pos.y - PlayerPos.y);	// Œ»Ý‚ÌˆÚ“®•ûŒü
+
+	float length = pPlayer->GetLength();
 
 	// ‹——£‚ª“ñ‚Â‚Ì‰~‚Ì‘å‚«‚³ˆÈ‰º‚ÌŽž
 	if (dis <= m_GravityRadius + PlayerRadius)
 	{
+		D3DXVECTOR3 velo = pPlayer->GetVelocity();
+
 		// “G‚Ì’e‚ÌÝ’è
-		//pPlayer = (D3DXVECTOR3(sinf(DirectionMove) * g_aEnemy[nCntEnemy].fLength * 0.05f, cosf(DirectionMove) * g_aEnemy[nCntEnemy].fLength * 0.05f, 0.0f));
+		velo = (velo + (D3DXVECTOR3(sinf(DirectionMove) * pPlayer->GetLength() * 0.001f, cosf(DirectionMove) * pPlayer->GetLength() * 0.001f, 0.0f)));
+		pPlayer->SetVelocity(velo);
 	}
 }
