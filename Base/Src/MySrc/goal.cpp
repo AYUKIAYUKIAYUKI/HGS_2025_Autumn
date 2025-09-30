@@ -10,7 +10,8 @@
 //****************************************************
 #include "goal.h"
 #include "texture.manager.h"
-
+#include "player.h"
+#include"object.manager.h"
 //****************************************************
 // usingディレクティブ
 //****************************************************
@@ -68,4 +69,25 @@ CGoal* CGoal::Create(D3DXVECTOR3 Pos)
 	p->SetSize(SizeSize);//大きさ設定
 	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("moon"));//テクスチャの設定
 	return p;
+}
+
+//============================================================================
+//ゴール判定
+//============================================================================
+bool CGoal::Judge()
+{
+	// プレイヤーの検索
+	std::list<CObject*>ol = CObjectManager::RefInstance().RefObjList(OBJ::TYPE::PLAYER);	// プレイヤーのリストを取得
+	CObject* pobj = ol.front();	// 先頭を代入
+	CPlayer* pPlayer = DownCast<CPlayer, CObject>(pobj);	// ダウンキャスト
+
+	if (pPlayer->GetPos().x >= GetPos().x - GetSize().x
+		&& pPlayer->GetPos().x <= GetPos().x + GetSize().x
+		&& pPlayer->GetPos().y >= GetPos().y - GetSize().y
+		&& pPlayer->GetPos().y <= GetPos().y + GetSize().y)
+	{
+		return true;
+	}
+
+	return false;
 }

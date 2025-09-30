@@ -26,6 +26,7 @@ public:
 	// <function>
 	void Update() override;	// 更新処理
 	void Draw() override;	// 描画処理
+	bool Judge();			//ゴール判定
 
 	// <static function>
 	static CGoal* Create(D3DXVECTOR3 Pos);	// 生成
@@ -46,6 +47,5 @@ private:
 	void Braking();			// 制動調整
 	void GravityFall();		// 重力加速
 	void AdjustPos();		// 位置を調整
-
 	// <Data>
 };
