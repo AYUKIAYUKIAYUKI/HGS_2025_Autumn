@@ -32,7 +32,8 @@ public:
 	static CPlayer* Create(const JSON& Json);	// ê∂ê¨
 
 	inline void SetPosBase(D3DXVECTOR3 PosBase) { m_PosBase = PosBase; };
-
+	inline void SetVelocity(D3DXVECTOR3 velo) { m_Velocity = velo; }
+	inline D3DXVECTOR3 GetVelocity() { return m_Velocity; }
 private:
 
 	// <function>
