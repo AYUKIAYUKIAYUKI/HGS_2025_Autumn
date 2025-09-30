@@ -15,6 +15,7 @@
 
 class CPlayer;
 class CGoal;
+class CPlanet;
 //****************************************************
 // ゲームクラスの定義
 //****************************************************
@@ -45,4 +46,5 @@ public:
 
 	CPlayer* m_pPlayer;
 	CGoal* m_pGoal;
+	std::vector<CPlanet*> m_PlanetList;
 };

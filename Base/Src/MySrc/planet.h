@@ -26,6 +26,7 @@ public:
 	// <function>
 	void Update() override;	// XVˆ—
 	void Draw() override;	// •`‰æˆ—
+	bool Judge();			//ƒS[ƒ‹”»’è
 
 	// <static function>
 	static CPlanet* Create(D3DXVECTOR3 pos);	// ¶¬

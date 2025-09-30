@@ -11,6 +11,8 @@
 #include "planet.h"
 #include "gravity.h"
 #include "texture.manager.h"
+#include "player.h"
+#include"object.manager.h"
 
 //****************************************************
 // usingディレクティブ
@@ -73,4 +75,25 @@ CPlanet* CPlanet::Create(D3DXVECTOR3 pos)
 	CGravity::Create(pos, SizeSize.x * 1.5f);
 
 	return p;
+}
+
+//============================================================================
+//ゴール判定
+//============================================================================
+bool CPlanet::Judge()
+{
+	// プレイヤーの検索
+	std::list<CObject*>ol = CObjectManager::RefInstance().RefObjList(OBJ::TYPE::PLAYER);	// プレイヤーのリストを取得
+	CObject* pobj = ol.front();	// 先頭を代入
+	CPlayer* pPlayer = DownCast<CPlayer, CObject>(pobj);	// ダウンキャスト
+
+	if (pPlayer->GetPos().x >= GetPos().x - GetSize().x
+		&& pPlayer->GetPos().x <= GetPos().x + GetSize().x
+		&& pPlayer->GetPos().y >= GetPos().y - GetSize().y
+		&& pPlayer->GetPos().y <= GetPos().y + GetSize().y)
+	{
+		return true;
+	}
+
+	return false;
 }

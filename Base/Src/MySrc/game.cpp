@@ -26,7 +26,7 @@
 #include"player.h"
 #include"GameBg.h"
 #include "window.h"
-
+#include"planet.h"
 //****************************************************
 // usingディレクティブ
 //****************************************************
@@ -87,6 +87,27 @@ void CGame::Update()
 		}
 	}
 
+	
+	for (auto obj : m_PlanetList)
+	{
+		if (obj->Judge())
+		{
+			// ② 文字作成
+			CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\Failed.json"));
+
+			// ③ 今いるプレイヤーを削除
+			if (m_pPlayer)
+			{
+				m_pPlayer->SetDeath();
+				m_pPlayer = nullptr;
+			}
+
+			// ④ 新しいプレイヤーを作成
+			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+			break;
+		}
+	}
+
 	// 次のシーンへ遷移
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
 	{
@@ -140,9 +161,9 @@ bool CGame::Initialize()
 	//無理やり惑星を生成
 	D3DXVECTOR3 Pos;
 	Pos = { 500.0f,720.0f,0.0f };
-	CPlanet::Create(Pos);
+	m_PlanetList.push_back(CPlanet::Create(Pos));
 	Pos = { 1000.0f,100.0f,0.0f };
-	CPlanet::Create(Pos);
+	m_PlanetList.push_back(CPlanet::Create(Pos));
 
 	//無理やりゴールを生成
 	Pos = { 1500.0f,450.0f,0.0f };
