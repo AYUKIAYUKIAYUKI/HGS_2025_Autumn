@@ -10,7 +10,7 @@
 //****************************************************
 #include "gravity.h"
 #include "object.manager.h"
-#include "planet.h"
+#include "player.h"
 
 //****************************************************
 // usingディレクティブ
@@ -66,9 +66,13 @@ CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)
 //===========================================================================================================
 float CGravity::CalDistance()
 {
+	// プレイヤーの検索
+	std::list<CObject*>ol = CObjectManager::RefInstance().RefObjList(OBJ::TYPE::PLAYER);	// プレイヤーのリストを取得
+	CObject* pobj = ol.front();	// 先頭を代入
+	CPlayer* pPlayer = DownCast<CPlayer, CObject>(pobj);	// ダウンキャスト
+
+	// 惑星の中心
 	D3DXVECTOR3 pos = GetPos();
-	std::list<CObject*>ol;
-	ol = CObjectManager::RefInstance().RefObjList(OBJ::TYPE::PLAYER);
 
 	// プレイヤーの情報
 	D3DXVECTOR3 PlayerPos = { 25.0f ,30.0f ,0.0f };
