@@ -38,6 +38,7 @@ using namespace useful;
 CGame::CGame()
 	: CScene()
 	, m_pPlayer(nullptr)
+	, m_pGoal(nullptr)
 {
 }
 
@@ -80,12 +81,16 @@ void CGame::Update()
 			// ④ 新しいプレイヤーを作成
 			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
 		}
+		else if(m_pGoal->Judge())
+		{
+			Change();
+		}
 	}
 
 	// 次のシーンへ遷移
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
 	{
-		Change();
+		//Change();
 	}
 
 	 // うんちなの生成
@@ -139,7 +144,7 @@ bool CGame::Initialize()
 
 	//無理やりゴールを生成
 	Pos = { 1500.0f,450.0f,0.0f };
-	CGoal::Create(Pos);
+	m_pGoal = CGoal::Create(Pos);
 
 	//無理やりプレイヤーを生成
 	if (!m_pPlayer)

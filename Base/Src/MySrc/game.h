@@ -14,7 +14,7 @@
 #include "scene.h"
 
 class CPlayer;
-
+class CGoal;
 //****************************************************
 // ゲームクラスの定義
 //****************************************************
@@ -44,4 +44,5 @@ public:
 	void Finalize()   override;	// 終了処理
 
 	CPlayer* m_pPlayer;
+	CGoal* m_pGoal;
 };
