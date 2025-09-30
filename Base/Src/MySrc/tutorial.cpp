@@ -91,7 +91,8 @@ void CTutorial::Update()
 	//fpUpdate();
 
 	// ŽŸ‚ÌƒV[ƒ“‚Ö‘JˆÚ
-	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
+	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN)
+		|| CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::START))
 	{
 		Change();
 	}
