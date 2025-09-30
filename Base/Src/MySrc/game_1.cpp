@@ -56,9 +56,6 @@ CGame_1::~CGame_1()
 //============================================================================
 void CGame_1::Update()
 {
-	static bool clear = false;
-	static int num = 60;
-
 #ifdef _DEBUG
 	//CRenderer::RefInstance().AddText("ƒQ[ƒ€‹@‚É", 1);
 #endif // _DEBUG
@@ -86,17 +83,7 @@ void CGame_1::Update()
 		}
 		else if (m_pGoal->Judge())
 		{
-			if (m_pPlayer)
-			{
-				m_pPlayer->SetDeath();
-				m_pPlayer = nullptr;
-			}
-			// ‡C V‚µ‚¢ƒvƒŒƒCƒ„[‚ðì¬
-			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
-
-			clear = true;
-			// ‡A •¶Žšì¬
-			CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\clear.json"));
+			Change();
 		}
 	}
 
@@ -122,13 +109,9 @@ void CGame_1::Update()
 	}
 
 	// ŽŸ‚ÌƒV[ƒ“‚Ö‘JˆÚ
-	if (clear)
+	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
 	{
-		num--;
-		if (num < 0)
-		{
-			Change();
-		}
+		//Change();
 	}
 
 #if 0
@@ -177,7 +160,7 @@ bool CGame_1::Initialize()
 
 	//–³—‚â‚è˜f¯‚ð¶¬
 	D3DXVECTOR3 Pos;
-	Pos = { 1500.0f,720.0f,0.0f };
+	Pos = { 800.0f,720.0f,0.0f };
 	m_PlanetList.push_back(CPlanet::Create(Pos));
 	Pos = { 800.0f,300.0f,0.0f };
 	m_PlanetList.push_back(CPlanet::Create(Pos));

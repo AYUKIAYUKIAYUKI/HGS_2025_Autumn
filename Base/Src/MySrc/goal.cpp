@@ -12,6 +12,7 @@
 #include "texture.manager.h"
 #include "player.h"
 #include"object.manager.h"
+#include "gravity.h"
 //****************************************************
 // usingディレクティブ
 //****************************************************
@@ -61,13 +62,15 @@ CGoal* CGoal::Create(D3DXVECTOR3 Pos)
 	p->Initialize();
 
 	// どっかローカルに置いたパラメータ
-	D3DXVECTOR3 SizeSize = { 120.0f, 120.0f, 0.0f };
+	D3DXVECTOR3 SizeSize = { 240.0f, 240.0f, 0.0f };
 	D3DXVECTOR3 Rot = { 0.0f, 0.0f, 0.0f };
 
 	p->SetPos(Pos);//位置設定
 	p->SetRot(Rot);//向き設定
 	p->SetSize(SizeSize);//大きさ設定
 	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("moon"));//テクスチャの設定
+
+	CGravity::Create(Pos, SizeSize.x);
 	return p;
 }
 
