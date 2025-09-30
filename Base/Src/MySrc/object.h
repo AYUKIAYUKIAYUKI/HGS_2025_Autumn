@@ -36,6 +36,7 @@ namespace OBJ
 		PLAYER,   // プレイヤー
 		PLANET,   // 惑星
 		GRAVITY,  // 引力
+		GOAL,	  // ゴール
 		MAX
 	};
 }
