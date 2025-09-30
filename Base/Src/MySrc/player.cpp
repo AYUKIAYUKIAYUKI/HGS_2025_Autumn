@@ -28,6 +28,8 @@ CPlayer::CPlayer(OBJ::TYPE Type, OBJ::LAYER Layer)
 	, m_fSwingDistance(0.0f)
 	, m_fDirection(0.0f)
 	, m_fSwingSpeed(0.0f)
+	, m_bLaunch(false)
+	, m_Velocity(VEC3_ZERO_INIT)
 {}
 
 //============================================================================
@@ -44,8 +46,16 @@ void CPlayer::Update()
 	// 基底クラスの更新処理
 	CObject2D::Update();
 
-	// スイング操作
-	Swing();
+	// 発射されていなければスイング操作
+	if (!m_bLaunch)
+	{
+		Swing();
+	}
+	else
+	{
+		// 発射後は飛行動作
+		FlyAway();
+	}
 
 	// 見た目の回転
 	Rotation();
@@ -159,6 +169,9 @@ void CPlayer::Swing()
 	// 現在の座標取得
 	Vec3 Pos = GetPos();
 
+	// 発射時に、速度や進行方向を保つために位置を保持
+	Vec3 PosOld = Pos;
+
 	// 基点の座標を元に、現在の方角分、基点距離 + 速度距離分離す
 	Pos =
 	{
@@ -188,6 +201,39 @@ void CPlayer::Swing()
 
 	// パッドの情報をコピー
 	m_OldPad = *CInputManager::RefInstance().GetPad();
+
+	// 発射
+	if (CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::A) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::B) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::X) ||
+		CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::Y))
+	{
+		// もうスイング処理はしない
+		m_bLaunch = true;
+
+	    // ガチで飛行する方向を決める
+		m_Velocity = 
+		{
+			(Pos.x - PosOld.x),
+			(Pos.y - PosOld.y),
+			0.0f
+		};
+	}
+}
+
+//============================================================================
+// 飛行
+//============================================================================
+void CPlayer::FlyAway()
+{
+	// 現在の座標取得
+	Vec3 Pos = GetPos();
+
+	// 飛行方向に移動
+	Pos += m_Velocity;
+
+	// 加算されている座標を設定
+	SetPos(Pos);
 }
 
 //============================================================================

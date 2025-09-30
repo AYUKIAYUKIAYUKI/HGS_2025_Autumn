@@ -37,6 +37,7 @@ private:
 
 	// <function>
 	void Swing();    // スイング操作
+	void FlyAway();  // 飛んでいく
 	void Rotation(); // 見た目の回転
 
 	CInputPad m_OldPad;		// 古いパッド
@@ -45,4 +46,7 @@ private:
 	float m_fSwingDistance;	// スイング距離
 	float m_fDirection;		// 現在の方角
 	float m_fSwingSpeed;	// スイング速度
+
+	bool m_bLaunch;	// 発射した
+	D3DXVECTOR3 m_Velocity;	// 加速する方向
 };
