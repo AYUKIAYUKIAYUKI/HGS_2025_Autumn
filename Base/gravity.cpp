@@ -34,11 +34,35 @@ CGravity::~CGravity()
 
 void CGravity::Update()
 {
+	float dis = Range();
+
+	Use(dis);
+}
+
+CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)
+{
+	// インスタンスを生成
+	CGravity* pGravity = DBG_NEW CGravity(OBJ::TYPE::GRAVITY, OBJ::LAYER::DEFAULT);
+
+	// 2Dオブジェクトの初期設定
+	pGravity->Initialize();
+
+	pGravity->SetPos(pos);
+	pGravity->SetSize({ radius,radius,0.0f });
+	
+	return pGravity;
+}
+
+//===========================================================================================================
+// 引力とプレイヤーの距離を計算
+//===========================================================================================================
+float CGravity::CalDistance()
+{
 	D3DXVECTOR3 pos = GetPos();
 
 	// 円２の情報
 	D3DXVECTOR3 PlayerPos = { 25.0f ,30.0f ,0.0f };
-	float PlayerRadius = 8.0f;
+	
 
 	float cal_a = pos.x - PlayerPos.x;	// x の計算
 	float cal_b = pos.y - PlayerPos.y;	// y の計算
@@ -46,14 +70,19 @@ void CGravity::Update()
 	// 計算した結果(距離)
 	float distance = sqrt(cal_a * cal_a + cal_b * cal_b);
 
+	return distance;
+}
+
+//===========================================================================================================
+// 引力の効力
+//===========================================================================================================
+void CGravity::Efficacy(float dis)
+{
+	float PlayerRadius = 8.0f;
+
 	// 距離が二つの円の大きさ以下の時
-	if (distance <= m_GravityRadius + PlayerRadius)
+	if (dis <= m_GravityRadius + PlayerRadius)
 	{
 
 	}
-}
-
-CGravity* CGravity::Create(D3DXVECTOR3 pos, float radius)
-{
-	return nullptr;
 }

@@ -37,7 +37,8 @@ private:
 	const float GRAVITY_FORCE = 10.0f;	// 引力の大きさ
 
 	// <function>
-
+	float CalDistance();		// 引力とプレイヤーの距離を計算
+	void Efficacy(float dis);	// 引力の効力
 
 	// <Data>
 	float m_GravityRadius;	// 引力の届く範囲
