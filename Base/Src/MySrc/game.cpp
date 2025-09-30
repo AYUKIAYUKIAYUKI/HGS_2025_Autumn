@@ -57,7 +57,7 @@ CGame::~CGame()
 void CGame::Update()
 {
 #ifdef _DEBUG
-	CRenderer::RefInstance().AddText("ゲーム機に", 1);
+	//CRenderer::RefInstance().AddText("ゲーム機に", 1);
 #endif // _DEBUG
 
 	// ① プレイヤーが画面外に
