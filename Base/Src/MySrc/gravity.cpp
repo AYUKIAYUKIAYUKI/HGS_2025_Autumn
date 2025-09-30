@@ -108,13 +108,21 @@ void CGravity::Efficacy(float dis)
 
 	float length = pPlayer->GetLength();
 
+	D3DXVECTOR3 velo = pPlayer->GetVelocity();
+
+	/* •ûŠp‚Ì‘€ì‚ÆŠp“x‚Ìo—Í */
+	if (useful::MIS::MyImGuiShortcut_BeginWindow("aaaaaaaaaa"))
+	{
+		ImGui::Text("distance: %f", dis);
+		ImGui::Text("velo: %f , %f", velo.x,velo.y);
+	}
+	ImGui::End();
+
 	// ‹——£‚ª“ñ‚Â‚Ì‰~‚Ì‘å‚«‚³ˆÈ‰º‚Ì
 	if (dis <= m_GravityRadius + PlayerRadius)
 	{
-		D3DXVECTOR3 velo = pPlayer->GetVelocity();
-
-		// “G‚Ì’e‚Ìİ’è
-		velo = (velo + (D3DXVECTOR3(sinf(DirectionMove) * pPlayer->GetLength() * 0.001f, cosf(DirectionMove) * pPlayer->GetLength() * 0.001f, 0.0f)));
+		// ˆÚ“®’l‚Ìİ’è
+		velo = (velo + (D3DXVECTOR3(sinf(DirectionMove) * pPlayer->GetLength() * 0.001f+(dis*0.0001f), cosf(DirectionMove) * pPlayer->GetLength() * 0.001f+ (dis * 0.0001f), 0.0f)));
 		pPlayer->SetVelocity(velo);
 	}
 }
