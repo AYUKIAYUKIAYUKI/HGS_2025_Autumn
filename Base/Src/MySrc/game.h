@@ -47,4 +47,5 @@ public:
 	CPlayer* m_pPlayer;
 	CGoal* m_pGoal;
 	std::vector<CPlanet*> m_PlanetList;
+	int m_nCounter;
 };

@@ -34,6 +34,8 @@ public:
 	inline void SetPosBase(D3DXVECTOR3 PosBase) { m_PosBase = PosBase; };
 	inline void SetVelocity(D3DXVECTOR3 velo) { m_Velocity = velo; }
 	inline D3DXVECTOR3 GetVelocity() { return m_Velocity; }
+	inline bool GetLaunch() { return m_bLaunch; }
+
 private:
 
 	// <function>

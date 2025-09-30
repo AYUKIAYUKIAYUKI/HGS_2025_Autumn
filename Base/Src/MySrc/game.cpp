@@ -28,6 +28,10 @@
 #include"GameBg.h"
 #include "window.h"
 #include"planet.h"
+namespace {
+	D3DXVECTOR3 n_PosOld = useful::VEC3_ZERO_INIT;
+}
+
 //****************************************************
 // usingディレクティブ
 //****************************************************
@@ -40,6 +44,7 @@ CGame::CGame()
 	: CScene()
 	, m_pPlayer(nullptr)
 	, m_pGoal(nullptr)
+	, m_nCounter(0)
 {
 }
 
@@ -82,30 +87,72 @@ void CGame::Update()
 			// ④ 新しいプレイヤーを作成
 			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
 		}
-		else if(m_pGoal->Judge())
+		else if (m_pGoal->Judge())
 		{
 			Change();
 		}
 	}
 
-	
-	for (auto obj : m_PlanetList)
+	// プレイヤーが止まっていて、発射フラグが立っていたら
+	if (n_PosOld == m_pPlayer->GetPos() && m_pPlayer->GetLaunch())
 	{
-		if (obj->Judge())
-		{
-			// ② 文字作成
-			CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\Failed.json"));
+		// ② 文字作成
+		CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\Failed.json"));
 
-			// ③ 今いるプレイヤーを削除
-			if (m_pPlayer)
+		// ③ 今いるプレイヤーを削除
+		if (m_pPlayer)
+		{
+			m_pPlayer->SetDeath();
+			m_pPlayer = nullptr;
+		}
+
+		// ④ 新しいプレイヤーを作成
+		m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+	}
+
+	if (m_pPlayer)
+	{
+		if (m_pPlayer->GetLaunch())
+		{
+			++m_nCounter;
+
+			if (m_nCounter > 180)
 			{
+				m_nCounter = 0;
+
+				// ② 文字作成
+				CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\Failed.json"));
+
+				// ③ 今いるプレイヤーを削除
+				if (m_pPlayer)
+				{
+					m_pPlayer->SetDeath();
+					m_pPlayer = nullptr;
+				}
+
+				// ④ 新しいプレイヤーを作成
+				m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+			}
+		}
+	}
+
+	if (m_pPlayer)
+	{
+		for (auto obj : m_PlanetList)
+		{
+			if (obj->Judge())
+			{
+				// ② 文字作成
+				CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\Failed.json"));
+
+				// ③ 今いるプレイヤーを削除
 				m_pPlayer->SetDeath();
 				m_pPlayer = nullptr;
-			}
 
-			// ④ 新しいプレイヤーを作成
-			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
-			break;
+				// ④ 新しいプレイヤーを作成
+				m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+				break;
+			}
 		}
 	}
 
@@ -116,11 +163,17 @@ void CGame::Update()
 	}
 
 #if 0
-	 // うんちなの生成
-	 auto p = CObjectText::Create(OpenJsonFile("Data\\JSON\\TEXT\\Unci.json"));
-	 p->SetPos({ GetRandomValue(1000.0f), GetRandomValue(1000.0f) });
-	 p->SetCol({ GetRandomValue(1.0f), GetRandomValue(1.0f), GetRandomValue(1.0f), 1.0f });
+	// うんちなの生成
+	auto p = CObjectText::Create(OpenJsonFile("Data\\JSON\\TEXT\\Unci.json"));
+	p->SetPos({ GetRandomValue(1000.0f), GetRandomValue(1000.0f) });
+	p->SetCol({ GetRandomValue(1.0f), GetRandomValue(1.0f), GetRandomValue(1.0f), 1.0f });
 #endif
+
+	// 過去の位置保存
+	if (m_pPlayer)
+	{
+		n_PosOld = m_pPlayer->GetPos();
+	}
 }
 
 //============================================================================
