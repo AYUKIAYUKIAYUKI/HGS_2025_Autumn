@@ -23,6 +23,8 @@
 #include "object.2D.h"
 #include "texture.manager.h"
 #include "object_X.h"
+#include "object.text.h"
+#include"TitleImage.h"
 
 //****************************************************
 // サンプル：2D
@@ -97,11 +99,20 @@ CTitle::~CTitle()
 void CTitle::Update()
 {
 #ifdef _DEBUG
-	CRenderer::RefInstance().AddText("タイトル", 1);
+	CRenderer::RefInstance().AddText("ポイポイ", 1);
 #endif // _DEBUG
 
 	// これが更新サンプルです
-	ffppEdit();
+	//ffppEdit();
+
+	// うんちなの生成
+	for (int i = 0; i < 5; i++)
+	{
+		auto p = CObjectText::Create(OpenJsonFile("Data\\JSON\\TEXT\\Title.json"));
+		p->SetPos({ GetRandomValue(1000.0f), GetRandomValue(1000.0f) });
+		p->SetCol({ GetRandomValue(1.0f), GetRandomValue(1.0f), GetRandomValue(1.0f), 1.0f });
+
+	}
 
 	// 次のシーンへ遷移
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
@@ -145,7 +156,7 @@ bool CTitle::Initialize()
 	CObject_X::Create(OBJ::TYPE::NONE, OBJ::LAYER::DEFAULT, nullptr);
 
 	// これが初期化サンプルです
-	ffppInit();
+	//ffppInit();
 
 	return true;
 }
