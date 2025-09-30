@@ -218,10 +218,7 @@ void CPlayer::Swing()
 	};
 
 	// 移動速度に応じたエフェクト生成
-	for (int i = 0; i < 2; ++i)
-	{
-		CObjectEffect::Create(Pos, m_Velocity * 0.25f, { m_fSwingDistance * 0.1f, m_fSwingDistance * 0.1f, 0.0f }, nullptr, 10.0f);
-	}
+	CObjectEffect::Create(Pos, -m_Velocity * 0.5f, { m_fSwingDistance * 0.25f, m_fSwingDistance * 0.25f, 0.0f }, nullptr);
 
 	// 発射
 	if (CInputManager::RefInstance().GetPad()->GetTrigger(CInputPad::JOYKEY::A) ||
@@ -235,7 +232,7 @@ void CPlayer::Swing()
 		// 発射エフェクトの生成
 		for (int i = 0; i < 15; ++i)
 		{
-			CObjectEffect::Create(Pos, -m_Velocity * 0.5f, { 20.0f, 20.0f, 0.0f },  nullptr, 50.0f);
+			CObjectEffect::Create(Pos, -m_Velocity * 0.5f, { 20.0f, 20.0f, 0.0f },  nullptr);
 		}
 	}
 }

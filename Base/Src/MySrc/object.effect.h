@@ -82,7 +82,7 @@ public:
 	}
 
 	// <static function>
-	static CObjectEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 vel, D3DXVECTOR3 Size, const JSON& json, float fRange); // ê∂ê¨
+	static CObjectEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 vel, D3DXVECTOR3 Size, const JSON& json); // ê∂ê¨
 
 	int m_nLimit;
 	int m_nGhostTime;

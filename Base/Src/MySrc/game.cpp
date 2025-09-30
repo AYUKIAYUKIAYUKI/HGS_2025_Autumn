@@ -62,6 +62,8 @@ CGame::~CGame()
 //============================================================================
 void CGame::Update()
 {
+	static bool clear = false;
+	static int num = 60;
 #ifdef _DEBUG
 	//CRenderer::RefInstance().AddText("ƒQ[ƒ€‹@‚É", 1);
 #endif // _DEBUG
@@ -89,7 +91,17 @@ void CGame::Update()
 		}
 		else if (m_pGoal->Judge())
 		{
-			Change();
+			if (m_pPlayer)
+			{
+				m_pPlayer->SetDeath();
+				m_pPlayer = nullptr;
+			}
+			// ‡C V‚µ‚¢ƒvƒŒƒCƒ„[‚ðì¬
+			m_pPlayer = CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
+
+			clear = true;
+			// ‡A •¶Žšì¬
+			CObjectText::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\TEXT\\clear.json"));
 		}
 	}
 
@@ -157,9 +169,13 @@ void CGame::Update()
 	}
 
 	// ŽŸ‚ÌƒV[ƒ“‚Ö‘JˆÚ
-	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
+	if (clear)
 	{
-		//Change();
+		num--;
+		if (num < 0)
+		{
+			Change();
+		}
 	}
 
 #if 0
