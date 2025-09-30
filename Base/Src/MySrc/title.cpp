@@ -111,8 +111,8 @@ void CTitle::Update()
 		auto p = CObjectText::Create(OpenJsonFile("Data\\JSON\\TEXT\\Title.json"));
 		p->SetPos({ GetRandomValue(1000.0f), GetRandomValue(1000.0f) });
 		p->SetCol({ GetRandomValue(1.0f), GetRandomValue(1.0f), GetRandomValue(1.0f), 1.0f });
-
 	}
+
 
 	// ŽŸ‚ÌƒV[ƒ“‚Ö‘JˆÚ
 	if (CInputManager::RefInstance().GetKeyboard()->GetTrigger(DIK_RETURN))
