@@ -52,7 +52,7 @@ void CPlanet::Draw()
 //============================================================================
 // 生成
 //============================================================================
-CPlanet* CPlanet::Create(/*const JSON& Json*/)
+CPlanet* CPlanet::Create(D3DXVECTOR3 pos)
 {
 	CPlanet* p = DBG_NEW CPlanet(OBJ::TYPE::PLANET, OBJ::LAYER::DEFAULT);
 
@@ -60,17 +60,16 @@ CPlanet* CPlanet::Create(/*const JSON& Json*/)
 	p->Initialize();
 
 	// どっかローカルに置いたパラメータ
-	D3DXVECTOR3 PosPos = { 300.0f, 300.0f, 0.0f };
 	D3DXVECTOR3 SizeSize = { 100.0f, 100.0f, 0.0f };
 	D3DXVECTOR3 Rot = { 0.0f, 0.0f, 0.0f };
 
 
-	p->SetPos(PosPos);//位置設定
+	p->SetPos(pos);//位置設定
 	p->SetRot(Rot);//向き設定
 	p->SetSize(SizeSize);//大きさ設定
 	//p->BindTex();//テクスチャの設定
 
-	CGravity::Create(PosPos, SizeSize.x * 1.5f);
+	CGravity::Create(pos, SizeSize.x * 1.5f);
 
 	return p;
 }

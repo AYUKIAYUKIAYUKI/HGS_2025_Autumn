@@ -21,6 +21,9 @@
 #include "object.manager.h"
 
 #include "object.text.h"
+#include "planet.h"
+#include "goal.h"
+#include"player.h"
 
 //****************************************************
 // usingディレクティブ
@@ -97,6 +100,20 @@ bool CGame::Initialize()
 	CSound::GetInstance()->Play(CSound::LABEL::BGM_0);
 
 	CCamera_Manager::RefInstance().SetSelectKey("Game");
+
+	//無理やり惑星を生成
+	D3DXVECTOR3 Pos;
+	Pos = { 500.0f,700.0f,0.0f };
+	CPlanet::Create(Pos);
+	Pos = { 1000.0f,200.0f,0.0f };
+	CPlanet::Create(Pos);
+
+	//無理やりゴールを生成
+	Pos = { 1500.0f,500.0f,0.0f };
+	CGoal::Create(Pos);
+
+	//無理やりプレイヤーを生成
+	CPlayer::Create(useful::OpenJsonFileMaybeThrow("Data\\JSON\\PLAYER\\Player.json"));
 
 	return true;
 }

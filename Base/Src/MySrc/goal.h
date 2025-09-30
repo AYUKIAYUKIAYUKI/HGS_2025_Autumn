@@ -28,7 +28,7 @@ public:
 	void Draw() override;	// •`‰æˆ—
 
 	// <static function>
-	static CGoal* Create(/*const JSON& Json*/);	// ¶¬
+	static CGoal* Create(D3DXVECTOR3 Pos);	// ¶¬
 
 private:
 

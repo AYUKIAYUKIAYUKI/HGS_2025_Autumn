@@ -43,6 +43,9 @@
     <Filter Include="魔界\エンティティ %28ここをいじろう%29\gravity">
       <UniqueIdentifier>{32daa6fd-2598-4ee6-8c85-b1af8ece7f5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="魔界\エンティティ %28ここをいじろう%29\goal">
+      <UniqueIdentifier>{f65a8e84-2c60-4d77-92f5-d3a809c967f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\MySrc\main.cpp">
@@ -167,6 +170,12 @@
     </ClCompile>
     <ClCompile Include="Src\MySrc\gravity.cpp">
       <Filter>魔界\エンティティ %28ここをいじろう%29\gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MySrc\goal.cpp">
+      <Filter>魔界\エンティティ %28ここをいじろう%29\goal</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MySrc\TitleImage.cpp">
+      <Filter>魔界\エンティティ %28ここをいじろう%29</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="Src\MySrc\gravity.h">
       <Filter>魔界\エンティティ %28ここをいじろう%29\gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MySrc\goal.h">
+      <Filter>魔界\エンティティ %28ここをいじろう%29\goal</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MySrc\TitleImage.h">
+      <Filter>魔界\エンティティ %28ここをいじろう%29</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

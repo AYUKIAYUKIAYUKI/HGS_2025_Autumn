@@ -28,7 +28,7 @@ public:
 	void Draw() override;	// •`‰æˆ—
 
 	// <static function>
-	static CPlanet* Create(/*const JSON& Json*/);	// ¶¬
+	static CPlanet* Create(D3DXVECTOR3 pos);	// ¶¬
 
 private:
 
