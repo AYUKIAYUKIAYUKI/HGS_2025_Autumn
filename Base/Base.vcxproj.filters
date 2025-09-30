@@ -37,6 +37,9 @@
     <Filter Include="魔界\オブジェクトとか %28基底用%29">
       <UniqueIdentifier>{08c9d603-c318-452d-9abf-cfb3f240b0d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="魔界\エンティティ %28ここをいじろう%29\planet">
+      <UniqueIdentifier>{e57fe3d4-38a2-439d-a410-1689af5e95b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\MySrc\main.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="Src\MySrc\player.cpp">
       <Filter>魔界\エンティティ %28ここをいじろう%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MySrc\planet.cpp">
+      <Filter>魔界\エンティティ %28ここをいじろう%29\planet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="Src\MySrc\player.h">
       <Filter>魔界\エンティティ %28ここをいじろう%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MySrc\planet.h">
+      <Filter>魔界\エンティティ %28ここをいじろう%29\planet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
