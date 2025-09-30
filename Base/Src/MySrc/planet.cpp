@@ -87,10 +87,11 @@ bool CPlanet::Judge()
 	CObject* pobj = ol.front();	// 先頭を代入
 	CPlayer* pPlayer = DownCast<CPlayer, CObject>(pobj);	// ダウンキャスト
 
-	if (pPlayer->GetPos().x >= GetPos().x - GetSize().x
-		&& pPlayer->GetPos().x <= GetPos().x + GetSize().x
-		&& pPlayer->GetPos().y >= GetPos().y - GetSize().y
-		&& pPlayer->GetPos().y <= GetPos().y + GetSize().y)
+	const float SubSize = -20.0f;
+	if (pPlayer->GetPos().x >= GetPos().x - (GetSize().x + SubSize)
+		&& pPlayer->GetPos().x <= GetPos().x + (GetSize().x + SubSize)
+		&& pPlayer->GetPos().y >= GetPos().y - (GetSize().y + SubSize)
+		&& pPlayer->GetPos().y <= GetPos().y + (GetSize().y + SubSize))
 	{
 		return true;
 	}
