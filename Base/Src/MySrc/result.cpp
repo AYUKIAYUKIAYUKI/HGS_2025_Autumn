@@ -48,7 +48,7 @@ CResult::~CResult()
 void CResult::Update()
 {
 #ifdef _DEBUG
-	CRenderer::RefInstance().AddText("リリースビルド", 1);
+	CRenderer::RefInstance().AddText("お前は成功したよ", 1);
 #endif // _DEBUG
 
 	// 次のシーンへ遷移
