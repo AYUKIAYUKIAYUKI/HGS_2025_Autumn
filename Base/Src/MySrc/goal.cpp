@@ -9,6 +9,7 @@
 // インクルードファイル
 //****************************************************
 #include "goal.h"
+#include "texture.manager.h"
 
 //****************************************************
 // usingディレクティブ
@@ -65,6 +66,6 @@ CGoal* CGoal::Create(D3DXVECTOR3 Pos)
 	p->SetPos(Pos);//位置設定
 	p->SetRot(Rot);//向き設定
 	p->SetSize(SizeSize);//大きさ設定
-	//p->BindTex();//テクスチャの設定
+	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("moon"));//テクスチャの設定
 	return p;
 }

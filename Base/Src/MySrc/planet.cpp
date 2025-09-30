@@ -10,6 +10,7 @@
 //****************************************************
 #include "planet.h"
 #include "gravity.h"
+#include "texture.manager.h"
 
 //****************************************************
 // usingディレクティブ
@@ -67,7 +68,7 @@ CPlanet* CPlanet::Create(D3DXVECTOR3 pos)
 	p->SetPos(pos);//位置設定
 	p->SetRot(Rot);//向き設定
 	p->SetSize(SizeSize);//大きさ設定
-	//p->BindTex();//テクスチャの設定
+	p->BindTex(CTextureManager::RefInstance().RefRegistry().BindAtKey("p2"));//テクスチャの設定
 
 	CGravity::Create(pos, SizeSize.x * 1.5f);
 
