@@ -75,7 +75,7 @@ float CGravity::CalDistance()
 	D3DXVECTOR3 pos = GetPos();
 
 	// プレイヤーの情報
-	D3DXVECTOR3 PlayerPos = { 25.0f ,30.0f ,0.0f };
+	D3DXVECTOR3 PlayerPos = pPlayer->GetPos();
 	
 	float cal_a = pos.x - PlayerPos.x;	// x の計算
 	float cal_b = pos.y - PlayerPos.y;	// y の計算
@@ -91,11 +91,24 @@ float CGravity::CalDistance()
 //===========================================================================================================
 void CGravity::Efficacy(float dis)
 {
-	float PlayerRadius = 8.0f;
+	// プレイヤーの検索
+	std::list<CObject*>ol = CObjectManager::RefInstance().RefObjList(OBJ::TYPE::PLAYER);	// プレイヤーのリストを取得
+	CObject* pobj = ol.front();	// 先頭を代入
+	CPlayer* pPlayer = DownCast<CPlayer, CObject>(pobj);	// ダウンキャスト
+
+	// プレイヤーの情報
+	D3DXVECTOR3 PlayerPos = pPlayer->GetPos();
+	float PlayerRadius = pPlayer->GetSize().x;
+
+	// 惑星の中心
+	D3DXVECTOR3 pos = GetPos();
+
+	float DirectionMove = atan2f(PlayerPos.x - pos.x, PlayerPos.y - pos.y);	// 現在の移動方向
 
 	// 距離が二つの円の大きさ以下の時
 	if (dis <= m_GravityRadius + PlayerRadius)
 	{
-
+		// 敵の弾の設定
+		//pPlayer = (D3DXVECTOR3(sinf(DirectionMove) * g_aEnemy[nCntEnemy].fLength * 0.05f, cosf(DirectionMove) * g_aEnemy[nCntEnemy].fLength * 0.05f, 0.0f));
 	}
 }
