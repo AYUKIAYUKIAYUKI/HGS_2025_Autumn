@@ -27,7 +27,7 @@ CObjectEffect::~CObjectEffect()
 
 }
 
-CObjectEffect* CObjectEffect::Create(D3DXVECTOR3 pos , D3DXVECTOR3 vel, D3DXVECTOR3 Size,  const JSON& json)
+CObjectEffect* CObjectEffect::Create(D3DXVECTOR3 pos , D3DXVECTOR3 vel, D3DXVECTOR3 Size,  const JSON& json, float fRange)
 {
 	CObjectEffect* p = DBG_NEW CObjectEffect(OBJ::TYPE::NONE, OBJ::LAYER::UI);
 
@@ -39,8 +39,8 @@ CObjectEffect* CObjectEffect::Create(D3DXVECTOR3 pos , D3DXVECTOR3 vel, D3DXVECT
 
 	// ç¿ïWÇìKìñÇ…Ç∏ÇÁÇ∑
 	pos += {
-		useful::GetRandomValue<float>(30.0f),
-		useful::GetRandomValue<float>(30.0f),
+		useful::GetRandomValue<float>(fRange),
+		useful::GetRandomValue<float>(fRange),
 		0.0f
 	};
 
